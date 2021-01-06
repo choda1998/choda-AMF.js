@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/radicevicbranko/AMF.js.git"
+    "url": "https://github.com/vedrano/AMF.js.git"
   },
   "keywords": [
     "amf"
@@ -26,7 +26,7 @@
   "author": "1parteko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/radicevicbranko/AMF.js/issues"
+    "url": "https://github.com/vedranp/AMF.js/issues"
   },
-  "homepage": "https://github.com/radicevicbranko/AMF.js"
+  "homepage": "https://github.com/vedranp/AMF.js"
 }
