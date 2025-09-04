@@ -9,8 +9,11 @@ class AMFEncoder extends writer.Writer
 	Creates a new AMFEncoder with a stream that it should
 	write to.
 	###
-	constructor: (writable) ->
+	constructor: (writable, options) ->
 		super writable
+		options ?= {}
+		@options =
+			cacheStrings: options.cacheStrings isnt false
 		# Setup reference tables so we can access them from the methods later.
 		@amf0References = []
 		@amf3ObjectReferences = []
@@ -77,7 +80,11 @@ class AMFEncoder extends writer.Writer
 		value = value.value if value instanceof classes.ForcedTypeValue
 
 		if valueType.referencable and value isnt "" # We never reference empty strings
-			index = @amf3StringReferences.indexOf value if valueType is AMF3.STRING 
+			if valueType is AMF3.STRING
+				unless @options.cacheStrings
+					@write valueType.id
+					return valueType.encode.call this, value
+				index = @amf3StringReferences.indexOf value
 			index = @amf3ObjectReferences.indexOf value if valueType isnt AMF3.STRING
 			if index isnt -1
 				@write valueType.id
